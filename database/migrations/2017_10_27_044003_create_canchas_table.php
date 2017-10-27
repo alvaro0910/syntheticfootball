@@ -14,7 +14,13 @@ class CreateCanchasTable extends Migration
     public function up()
     {
         Schema::create('canchas', function (Blueprint $table) {
+            $table->engine='InnoDB';
             $table->increments('id');
+            $table->integer('id_Usuario')->unsigned();
+            $table->text('descripcion', 500);
+            $table->binary('imagen');
+
+            $table->foreign('id_Usuario')->references('id')->on('users')->ondelete('cascade');
             $table->timestamps();
         });
     }

@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('canchas','CanchaController');
+Route::resource('precios','PrecioController');
+Route::resource('reserva','ReservaController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
