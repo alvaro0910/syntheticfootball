@@ -26,6 +26,15 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+      $id = Auth::id();
+        if (condition) {
+          return 'adm.homeadm';
+        }else {
+          return 'usu.homeusu';
+        }
+    }
 
     /**
      * Create a new controller instance.
