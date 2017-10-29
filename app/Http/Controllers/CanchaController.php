@@ -16,8 +16,8 @@ class CanchaController extends Controller
      */
     public function index()
     {
-      $canchas = Cancha::all();
-      return view('cancha.index', ['list' => $canchas]);
+      $cancha = Cancha::where('id_Usuario', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate();
+      return view('cancha.index', ['list' => $cancha]);
     }
 
     /**
@@ -41,13 +41,11 @@ class CanchaController extends Controller
       //$input = array_merge($request->all(), ["user_id" => Auth::id()])
       //Moment::create($input);
 
-      $cancha = new Cancha();
-      $cancha->fill($request->all());
-      $cancha->id_Usuario = Auth::id();
+      $cancha = new Cancha($request->all());
+      $cancha->id_Usuario = Auth::user()->id;
       $cancha->save();
 
-      Cancha::create($input);
-      return redirect('/homeadm')->withFlashMessage('Cancha agregada con exito');
+      return back()->with('success_message', 'Cancha agregada con exito');
     }
 
     /**
@@ -58,7 +56,7 @@ class CanchaController extends Controller
      */
     public function show($id)
     {
-      $cancha = Cancha::findOrFail($id);
+      $cancha = Cancha::where('id_Usuario', Auth::user()->id)->findOrFail($id);
       return view('cancha.show')->withData($cancha);
     }
 
@@ -70,12 +68,8 @@ class CanchaController extends Controller
      */
     public function edit($id)
     {
-      try{
-        $cancha = Cancha::findOrFail($id);
-        return view('cancha.edit', ['data' => $cancha]);
-      }catch(ModelNotFoundException $e){
-        return redirect()->back()->withFlashMessage('La cancha ($id) no se encuentra para editar!');
-      }
+      $cancha = Cancha::where('id_Usuario', Auth::user()->id)->findOrFail($id);
+      return view('cancha.show', ['data' => $cancha]);
     }
 
     /**
@@ -87,15 +81,11 @@ class CanchaController extends Controller
      */
     public function update(StoreCanchaRequest $request, $id)
     {
-      try{
-        $cancha = Cancha::findOrFail($id);
-        $input = $request->all();
-        $cancha->fill($input)->save();
-        return redirect('/homeadm')->withFlashMessage('Cancha Actualizada Con Exito!');
-      }
-      catch(ModelNotFoundException $e){
-        return redirect()->back()->withFlashMessage('La Cancha No Pudo Ser Editada!');
-      }
+      $cancha = Cancha::where('id_Usuario', Auth::user()->id)->findOrFail($id);
+      $input = $request->all();
+      $cancha->update($input) ;
+
+      return back()->with('success_message', 'Cancha Actualizada con Exito!');
     }
 
     /**

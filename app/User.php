@@ -27,6 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getNameAttribute(){
+      return ucfirst($this->nombre . " " . $this->apellido);
+    }
+
     public function canchas(){
       return $this->hasMany('App\Cancha');
     }
