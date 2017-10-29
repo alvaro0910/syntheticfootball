@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cancha;
+use App\Http\Requests\StoreCanchaRequest;
 
 class CanchaController extends Controller
 {
@@ -13,7 +15,8 @@ class CanchaController extends Controller
      */
     public function index()
     {
-        //
+      $canchas = Cancha::all();
+      return view('cancha.index', ['list' => $canchas]);
     }
 
     /**
@@ -23,7 +26,7 @@ class CanchaController extends Controller
      */
     public function create()
     {
-        //
+        return view('cancha.create');
     }
 
     /**
@@ -32,9 +35,11 @@ class CanchaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCanchaRequest $request)
     {
-        //
+      $input = $request->all();
+      Cancha::create($input);
+      return redirect('/homeadm')->withFlashMessage('Cancha agregada con exito');
     }
 
     /**
@@ -45,7 +50,8 @@ class CanchaController extends Controller
      */
     public function show($id)
     {
-        //
+      $cancha = Cancha::findOrFail($id);
+      return view('cancha.show')->withData($cancha);
     }
 
     /**
@@ -56,7 +62,12 @@ class CanchaController extends Controller
      */
     public function edit($id)
     {
-        //
+      try{
+        $cancha = Cancha::findOrFail($id);
+        return view('cancha.edit', ['data' => $cancha]);
+      }catch(ModelNotFoundException $e){
+        return redirect()->back()->withFlashMessage('La cancha ($id) no se encuentra para editar!');
+      }
     }
 
     /**
@@ -66,9 +77,17 @@ class CanchaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCanchaRequest $request, $id)
     {
-        //
+      try{
+        $cancha = Cancha::findOrFail($id);
+        $input = $request->all();
+        $cancha->fill($input)->save();
+        return redirect('/homeadm')->withFlashMessage('Cancha Actualizada Con Exito!');
+      }
+      catch(ModelNotFoundException $e){
+        return redirect()->back()->withFlashMessage('La Cancha No Pudo Ser Editada!');
+      }
     }
 
     /**
@@ -79,6 +98,13 @@ class CanchaController extends Controller
      */
     public function destroy($id)
     {
-        //
+      try{
+        $cancha = Cancha::findOrFail($id);
+        $cancha->delete();
+        return redirect('/homeadm')->withFlashMessage('Cancha Eliminda Con Exito!');
+      }
+      catch(ModelNotFoundException $e){
+        return redirect()->back()->withFlashMessage("La Cancha ($id) No Pudo Ser Eliminada!");
+      }
     }
 }

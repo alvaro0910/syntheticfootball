@@ -15,10 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('canchas','CanchaController');
-Route::resource('precios','PrecioController');
-Route::resource('reserva','ReservaController');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/homeadm', 'HomeController@index')->name('admin');
+Route::get('/homeusu', 'HomeController@index')->name('usu');
+//Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function() {
+  Route::resource('canchas','CanchaController');
+  Route::resource('precios','PrecioController');
+  Route::resource('reserva','ReservaController');
+});

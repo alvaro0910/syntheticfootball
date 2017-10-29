@@ -70,7 +70,19 @@
                 </div>
             </div>
         </nav>
+        @if($errors->any())
+          <div class="alert alert-danger">
+              @foreach($errors->all() as $error)
+                  <p>{{ $error }}</p>
+              @endforeach
+          </div>
+        @endif    
 
+        @if(Session::has('flash_message'))
+          <article class="alert alert-success">
+            {{ Session::get('flash_message') }}
+          </article>
+        @endif
         @yield('content')
     </div>
 

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('../layouts.app')
 
 @section('content')
 <div class="container">
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in! esto es admin como yo
                 </div>
             </div>
         </div>
