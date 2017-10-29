@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
 
     public function getNameAttribute(){
-      return ucfirst($this->nombre . " " . $this->apellido);
+      return ucfirst($this -> nombre . " " . $this -> apellido);
     }
 
     public function canchas(){

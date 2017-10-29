@@ -96,13 +96,9 @@ class CanchaController extends Controller
      */
     public function destroy($id)
     {
-      try{
-        $cancha = Cancha::findOrFail($id);
-        $cancha->delete();
-        return redirect('/homeadm')->withFlashMessage('Cancha Eliminda Con Exito!');
-      }
-      catch(ModelNotFoundException $e){
-        return redirect()->back()->withFlashMessage("La Cancha ($id) No Pudo Ser Eliminada!");
-      }
+      $cancha = Cancha::where('id_Usuario', Auth::user()->id)->findOrFail($id);
+      $cancha->delete();
+      return back()->with('Cancha Eliminda Con Exito!');
     }
+  }
 }
