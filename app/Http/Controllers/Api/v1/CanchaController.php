@@ -23,7 +23,10 @@ class CanchaController extends Controller
 
   public function store(StoreCanchaRequest $request)
   {
-      $cancha = Cancha::create($request->all());
+      //$cancha = Cancha::create($request->all());
+      $cancha = new Cancha($reques->all());
+      $cancha->id_Usuario = 1;
+      $cancha->save();
       return response()->json($cancha, 201);
   }
 
