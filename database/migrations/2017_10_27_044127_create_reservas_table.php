@@ -22,8 +22,8 @@ class CreateReservasTable extends Migration
             $table->time('hora_Final');
             $table->date('dia');
 
-            $table->foreign('id_Cancha')->references('id')->on('canchas')->ondelete('cascade');
-            $table->foreign('id_Usuario')->references('id')->on('users')->ondelete('cascade');
+            $table->foreign('id_Cancha')->references('id')->on('canchas')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_Usuario')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

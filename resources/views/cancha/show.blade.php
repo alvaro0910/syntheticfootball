@@ -9,6 +9,10 @@
     <td>{{ $data->id }}</td>
   </tr>
   <tr>
+    <td>Propietario</td>
+    <td>{{ $data->id_Usuario }}</td>
+  </tr>
+  <tr>
     <td>Created At</td>
     <td>{{ $data->created_at }}</td>
   </tr>

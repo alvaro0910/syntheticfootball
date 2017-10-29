@@ -14,4 +14,8 @@ class Cancha extends Model
   protected $fillable = [
       'descripcion',
   ];
+
+  public function propietario(){
+    return $this->belongsTo('App\User');
+  }
 }

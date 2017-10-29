@@ -8,6 +8,7 @@
 <table>
   <th>
     <td>Id</td>
+    <td>Propietario</td>
     <td>Date</td>
     <td>Options</td>
   </th>
@@ -15,6 +16,7 @@
 
 <tr>
   <td> {{ $item-> id }} </td>
+  <td> {{ $item-> id_Usuario }} </td>
   <td> {{ $item-> updated_at }}</td>
   <td>
     <p>

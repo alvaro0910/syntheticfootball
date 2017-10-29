@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cancha;
 use App\Http\Requests\StoreCanchaRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CanchaController extends Controller
 {
@@ -37,7 +38,14 @@ class CanchaController extends Controller
      */
     public function store(StoreCanchaRequest $request)
     {
-      $input = $request->all();
+      //$input = array_merge($request->all(), ["user_id" => Auth::id()])
+      //Moment::create($input);
+
+      $cancha = new Cancha();
+      $cancha->fill($request->all());
+      $cancha->id_Usuario = Auth::id();
+      $cancha->save();
+
       Cancha::create($input);
       return redirect('/homeadm')->withFlashMessage('Cancha agregada con exito');
     }
