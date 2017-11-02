@@ -28,7 +28,16 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        if (Auth::check()) {
+          return 'homeadm';
+        }
+        else{
+            return 'homeusu';
+        }
+    }
 
     /**
      * Create a new controller instance.

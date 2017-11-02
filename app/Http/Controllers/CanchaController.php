@@ -69,7 +69,7 @@ class CanchaController extends Controller
     public function edit($id)
     {
       $cancha = Cancha::where('id_Usuario', Auth::user()->id)->findOrFail($id);
-      return view('cancha.show', ['data' => $cancha]);
+      return view('cancha.edit', ['data' => $cancha]);
     }
 
     /**
@@ -101,4 +101,3 @@ class CanchaController extends Controller
       return back()->with('Cancha Eliminda Con Exito!');
     }
   }
-}
