@@ -40,7 +40,6 @@ class CanchaController extends Controller
     {
       //$input = array_merge($request->all(), ["user_id" => Auth::id()])
       //Moment::create($input);
-
       $cancha = new Cancha($request->all());
       $cancha->id_Usuario = Auth::user()->id;
       $cancha->save();

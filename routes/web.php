@@ -24,5 +24,5 @@ Route::get('/homeusu', 'HomeController@index')->name('usu');
 Route::group(['middleware' => 'auth'], function() {
   Route::resource('canchas','CanchaController');
   Route::resource('precios','PrecioController');
-  Route::resource('reserva','ReservaController');
+  Route::resource('reservas','ReservaController');
 });

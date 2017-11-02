@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Reserva;
+use App\Http\Requests\StoreReservaRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ReservaController extends Controller
 {
@@ -13,7 +16,12 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        //
+      //$reserva = Cancha::where('id_Usuario', Auth::user()->id)
+       $reserva = Reserva::select('*')->get();
+        //  ->join('reservas', 'reservas.id_Cancha', '=', 'canchas.id')->orderBy('created_at', 'DESC')->paginate();;
+        //$reserva = Reserva::where('id_Cancha')->join('reservas', 'reservas.id_Cancha', '=', 'canchas.id');
+      //$reserva = Reserva::where('id_Usuario', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate();
+      return view('reserva.index', ['list' => $reserva]);
     }
 
     /**

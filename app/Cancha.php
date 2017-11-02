@@ -18,4 +18,8 @@ class Cancha extends Model
   public function propietario(){
     return $this->belongsTo('App\User');
   }
+
+  public function reservas(){
+    return $this->hasMany('App\Reserva');
+  }
 }

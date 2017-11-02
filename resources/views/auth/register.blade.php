@@ -60,7 +60,7 @@
               {{ csrf_field() }}
               <fieldset>
               <!-- Form Name -->
-              <legend></legend>
+              <legend>Ingrese Sus Datos Personales</legend>
 
               <!-- Text input-->
               <div class="form-group{{ $errors->has('documento') ? ' has-error' : '' }}">

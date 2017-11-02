@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reserva extends Model
 {
-    //
+  public function cliente(){
+    return $this->belongsTo('App\Canchas');
+  }
 }

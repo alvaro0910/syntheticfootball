@@ -33,17 +33,18 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/">HOME</a></li>
+
                 <!-- Authentication Links -->
                 @guest
+                    <li><a href="/">HOME</a></li>
                     <li><a href="{{ route('login') }}">LOGIN</a></li>
                     <li><a href="{{ route('register') }}">REGISTRO</a></li>
                 @else
                   <li><a href="#" >{{ Auth::user()->name }}</a></li>
-                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a></li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
+                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a></li>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                  </form>
                 @endguest
           </ul>
         </div>
