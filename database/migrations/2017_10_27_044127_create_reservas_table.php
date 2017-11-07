@@ -18,6 +18,7 @@ class CreateReservasTable extends Migration
             $table->increments('id');
             $table->integer('id_Cancha')->unsigned();
             $table->integer('id_Usuario')->unsigned();
+            $table->text('observacion');
             $table->time('hora_Inicial');
             $table->time('hora_Final');
             $table->date('dia');

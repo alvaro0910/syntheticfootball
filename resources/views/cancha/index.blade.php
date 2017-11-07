@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Lista Canchas')
+
 @section('content')
 <br><br><br><br>
   <div class="container">
@@ -13,7 +15,7 @@
                   <thead class="thead-inverse">
                   <tr>
                   <th>Cancha ID</th>
-                  <th>Usuario ID</th>
+                  <th>Nombre</th>
                   <th>Ver</th>
                   <th>Editar</th>
                   </tr>
@@ -29,7 +31,7 @@
                     </tr>
                     <tr>
                     <td>{{ $e->id }}</td>
-                    <td><p>{{ $e->id_Usuario }}</p></td>
+                    <td><p>{{ $e->nombre }}</p></td>
                     <td><a title="Ver" href="{{ route('canchas.show', $e) }}"><img src="{{ asset('imgs/ver.png') }}" alt="ver" style="width:25px;"/></a></td>
                     <td><a title="Editar" href="{{ route('canchas.edit', $e->id) }}"><img src="{{ asset('imgs/editar.png') }}" alt="editar" style="width:25px;"/></a></td>
 

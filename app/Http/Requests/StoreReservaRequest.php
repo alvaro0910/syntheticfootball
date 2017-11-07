@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCanchaRequest extends FormRequest
+class StoreReservaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,11 @@ class StoreCanchaRequest extends FormRequest
     public function rules()
     {
         return [
-          'descripcion' => 'required | string | min:10 | max:500',
-          'nombre' => 'required | string | min:3 | max:30',
-          'ancho' => 'required | numeric',
-          'largo' => 'required | numeric',
+          'id_Cancha' => 'required',
+          'observacion' => 'required | string | min:10 | max:500',
+          'hora_Inicial' => 'required',
+          'hora_Final' => 'required',
+          'dia' => 'required',
         ];
     }
 }

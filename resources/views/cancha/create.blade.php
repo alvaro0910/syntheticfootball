@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Crear')
+
 @section('content')
   <br><br>
   <div class="container">
@@ -13,9 +15,22 @@
             {!! Form::open(['route' => 'canchas.store']) !!}
 
             <div class="form-group">
+              <label for="nombre" class="control-label">Nombre</label>
+              {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+              <label for="ancho" class="control-label">Ancho</label>
+              {!! Form::text('ancho', null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+              <label for="largo" class="control-label">Largo</label>
+              {!! Form::text('largo', null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
               <label for="descripcion" class="control-label">Descripcion</label>
               {!! Form::textarea('descripcion', null, ['class' => 'form-control']) !!}
             </div>
+
             <div class="form-group">
               {!! Form::submit('Crear nueva Cancha', ['class' => 'btn btn-primary']) !!}
               {!! Form::close() !!}

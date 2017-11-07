@@ -27,7 +27,7 @@ class CanchaController extends Controller
      */
     public function create()
     {
-        return view('cancha.create');
+      return view('cancha.create');
     }
 
     /**
@@ -42,6 +42,7 @@ class CanchaController extends Controller
       //Moment::create($input);
       $cancha = new Cancha($request->all());
       $cancha->id_Usuario = Auth::user()->id;
+      $cancha->imagen = null;
       $cancha->save();
 
       return back()->with('success_message', 'Cancha agregada con exito');
@@ -82,7 +83,7 @@ class CanchaController extends Controller
     {
       $cancha = Cancha::where('id_Usuario', Auth::user()->id)->findOrFail($id);
       $input = $request->all();
-      $cancha->update($input) ;
+      $cancha->update($input);
 
       return back()->with('success_message', 'Cancha Actualizada con Exito!');
     }

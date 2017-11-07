@@ -17,6 +17,9 @@ class CreateCanchasTable extends Migration
             $table->engine='InnoDB';
             $table->increments('id');
             $table->integer('id_Usuario')->unsigned();
+            $table->string('nombre', 15);
+            $table->double('ancho', 15);
+            $table->double('largo', 15);
             $table->text('descripcion', 500);
             $table->binary('imagen')->null();
 

@@ -12,7 +12,11 @@ class Cancha extends Model
    * @var array
    */
   protected $fillable = [
-      'descripcion',
+      'descripcion','nombre','ancho','largo',
+  ];
+
+  protected $hidden = [
+      'id_Usuario',
   ];
 
   public function propietario(){

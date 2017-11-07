@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reserva;
+use App\Cancha;
 use App\Http\Requests\StoreReservaRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class ReservaController extends Controller
 {
@@ -17,9 +20,10 @@ class ReservaController extends Controller
     public function index()
     {
       //$reserva = Cancha::where('id_Usuario', Auth::user()->id)
-       $reserva = Reserva::select('*')->get();
-        //  ->join('reservas', 'reservas.id_Cancha', '=', 'canchas.id')->orderBy('created_at', 'DESC')->paginate();;
-        //$reserva = Reserva::where('id_Cancha')->join('reservas', 'reservas.id_Cancha', '=', 'canchas.id');
+      $reserva = Reserva::select('*')->get();
+      //$reserva = DB::table('reservas')->get();
+      //  ->join('reservas', 'reservas.id_Cancha', '=', 'canchas.id')->orderBy('created_at', 'DESC')->paginate();;
+      //$reserva = Reserva::where('id_Cancha')->join('reservas', 'reservas.id_Cancha', '=', 'canchas.id');
       //$reserva = Reserva::where('id_Usuario', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate();
       return view('reserva.index', ['list' => $reserva]);
     }
@@ -31,7 +35,8 @@ class ReservaController extends Controller
      */
     public function create()
     {
-        //
+      $cancha = Cancha::select('*')->get();
+      return view('reserva.create', ['list' => $cancha]);
     }
 
     /**
@@ -40,9 +45,13 @@ class ReservaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreReservaRequest $request)
     {
-        //
+      $reserva = new Reserva($request->all());
+      $reserva->id_Usuario = Auth::user()->id;
+      $reserva->save();
+
+      return back()->with('success_message', 'Reserva Realizada con Exito');
     }
 
     /**
@@ -53,7 +62,8 @@ class ReservaController extends Controller
      */
     public function show($id)
     {
-        //
+      $reserva = Reserva::where('id_Usuario', Auth::user()->id)->findOrFail($id);
+      return view('reserva.show')->withData($reserva);
     }
 
     /**
@@ -64,7 +74,9 @@ class ReservaController extends Controller
      */
     public function edit($id)
     {
-        //
+      $cancha = Cancha::select('*')->get();
+      $reserva = Reserva::where('id_Usuario', Auth::user()->id)->findOrFail($id);
+      return view('reserva.edit', ['data' => $reserva, 'list' => $cancha]);
     }
 
     /**
@@ -74,9 +86,13 @@ class ReservaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreReservaRequest $request, $id)
     {
-        //
+      $reserva = Reserva::where('id_Usuario', Auth::user()->id)->findOrFail($id);
+      $input = $request->all();
+      $reserva->update($input);
+
+      return back()->with('success_message', 'Reserva Actualizada con Exito!');
     }
 
     /**
@@ -87,6 +103,8 @@ class ReservaController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $reserva = Reserva::where('id_Usuario', Auth::user()->id)->findOrFail($id);
+      $reserva->delete();
+      return back()->with('Reserva Eliminda Con Exito!');
     }
 }

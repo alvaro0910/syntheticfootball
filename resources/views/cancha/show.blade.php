@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Ver')
+
 @section('content')
 <br><br><br><br>
 
@@ -18,6 +20,18 @@
             <tr>
               <td>Propietario</td>
               <td>{{ $data->id_Usuario }}</td>
+            </tr>
+            <tr>
+              <td>Nombre</td>
+              <td>{{ $data->nombre }}</td>
+            </tr>
+            <tr>
+              <td>Ancho</td>
+              <td>{{ $data->ancho }}</td>
+            </tr>
+            <tr>
+              <td>Largo</td>
+              <td>{{ $data->largo }}</td>
             </tr>
             <tr>
               <td>Created At</td>

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Lista Reservas')
+
 @section('content')
 <br><br><br><br>
   <div class="container">
@@ -12,15 +14,16 @@
                   <table class="table">
                   <thead class="thead-inverse">
                   <tr>
-                  <th>Cancha ID</th>
+                  <th>Reserva ID</th>
                   <th>Usuario ID</th>
+                  <th>Dia</th>
                   <th>Ver</th>
                   <th>Editar</th>
                   </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <td colspan="2" style="text-align:center"><a title="Agregar" href="{!! url('canchas/create') !!}">Agregar Cancha <img src="{{ asset('imgs/agregar.png') }}" alt="editar" style="width:25px;"/></a></td>
+                      <td colspan="2" style="text-align:center"><a title="Agregar" href="{!! url('reservas/create') !!}">Agregar Reserva <img src="{{ asset('imgs/agregar.png') }}" alt="editar" style="width:25px;"/></a></td>
                       <td colspan="2" style="text-align:center"><a title="Regresar" href="{{ route('admin') }}" >Regresar <img src="{{ asset('imgs/regresar.png') }}" alt="ver" style="width:25px;"/></a></td>
                     </tr>
                   <tfoot>
@@ -28,14 +31,15 @@
                   @foreach ($list as $e)
                     </tr>
                     <tr>
-                    <td>{{ $e->id }}</td>
+                    <td>{{ $e->id  }}</td>
                     <td><p>{{ $e->id_Usuario }}</p></td>
-                    <td><a title="Ver" href="{{ route('canchas.show', $e) }}"><img src="{{ asset('imgs/ver.png') }}" alt="ver" style="width:25px;"/></a></td>
-                    <td><a title="Editar" href="{{ route('canchas.edit', $e->id) }}"><img src="{{ asset('imgs/editar.png') }}" alt="editar" style="width:25px;"/></a></td>
+                    <td><p>{{ $e->dia }}</p></td>
+                    <td><a title="Ver" href="{{ route('reservas.show', $e) }}"><img src="{{ asset('imgs/ver.png') }}" alt="ver" style="width:25px;"/></a></td>
+                    <td><a title="Editar" href="{{ route('reservas.edit', $e->id) }}"><img src="{{ asset('imgs/editar.png') }}" alt="editar" style="width:25px;"/></a></td>
 
                     <td>
-                      {!! Form::open(['method' => 'DELETE','route' => ['canchas.destroy', $e->id]]) !!}
-                      {!! Form::submit('Borrar esta Cancha?', ['class' => 'btn btn-danger']) !!}
+                      {!! Form::open(['method' => 'DELETE','route' => ['reservas.destroy', $e->id]]) !!}
+                      {!! Form::submit('Borrar Esta Reserva?', ['class' => 'btn btn-danger']) !!}
                       {!! Form::close() !!}
                     </td>
                     </tr>
