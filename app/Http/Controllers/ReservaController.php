@@ -19,13 +19,19 @@ class ReservaController extends Controller
      */
     public function index()
     {
-      //$reserva = Cancha::where('id_Usuario', Auth::user()->id)
-      $reserva = Reserva::select('*')->get();
-      //$reserva = DB::table('reservas')->get();
-      //  ->join('reservas', 'reservas.id_Cancha', '=', 'canchas.id')->orderBy('created_at', 'DESC')->paginate();;
-      //$reserva = Reserva::where('id_Cancha')->join('reservas', 'reservas.id_Cancha', '=', 'canchas.id');
-      //$reserva = Reserva::where('id_Usuario', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate();
-      return view('reserva.index', ['list' => $reserva]);
+      //$reserva = DB::select('reservas')
+            //->join('canchas', 'reservas.id', '=', 'canchas.id_Usuario')
+            //->select('reservas.*', 'canchas.nombre')
+            //->get();
+      //$reserva = Reserva::where('id_Usuario', Auth::user()->id)->get();
+      $reserva = DB::select(
+      'SELECT reservas.id, reservas.id_Usuario, reservas.dia, canchas.nombre AS canchanom, users.nombre
+      FROM reservas, users
+      INNER JOIN canchas
+      WHERE canchas.id_Usuario = '.Auth::user()->id.'
+      AND reservas.id_Cancha = canchas.id
+      AND users.id = reservas.id_Usuario;');
+      return view('reserva.index', ['list' =>  $reserva]);
     }
 
     /**
@@ -35,7 +41,8 @@ class ReservaController extends Controller
      */
     public function create()
     {
-      $cancha = Cancha::select('*')->get();
+      //$cancha = Cancha::select('*')->get();
+      $cancha = Cancha::where('id_Usuario', Auth::user()->id)->get();
       return view('reserva.create', ['list' => $cancha]);
     }
 
@@ -47,11 +54,47 @@ class ReservaController extends Controller
      */
     public function store(StoreReservaRequest $request)
     {
-      $reserva = new Reserva($request->all());
-      $reserva->id_Usuario = Auth::user()->id;
-      $reserva->save();
+      $fechaReserva = $request->dia;
+      $hi = $request->hora_Inicial;
+      $hf = $request->hora_Final;
 
-      return back()->with('success_message', 'Reserva Realizada con Exito');
+      $todayh = getdate();
+      $d = $todayh['mday'];
+      $m = $todayh['mon'];
+      $y = $todayh['year'];
+
+      $fechaActual = $y.'-'.$m.'-'.$d;
+
+      //$tiempoReserva = $horaFinal - $horaInicial;
+      //dd($hi." ".$hf);
+      if ($fechaReserva >= $fechaActual) {
+        if ($hi < $hf) {
+          $reserva = new Reserva($request->all());
+          $reserva->id_Usuario = Auth::user()->id;
+          $reserva->save();
+
+          $notificacion = array(
+                'message' => 'Reserva Realizada con Exito!',
+                'alert-type' => 'success'
+            );
+          return redirect()->back()->with($notificacion);
+
+          //return back()->with('success_message', 'Reserva Realizada con Exito');
+        }else {
+          $notificacion = array(
+                'message' => 'Hora Inicial Debe ser Menor a la Hora Final!',
+                'alert-type' => 'warning'
+            );
+          return redirect()->back()->with($notificacion);
+        }
+
+      }else {
+        $notificacion = array(
+              'message' => 'Fecha Debe Ser Mayor o Igual a la Fecha Actual!',
+              'alert-type' => 'warning'
+          );
+        return redirect()->back()->with($notificacion);
+      }
     }
 
     /**
@@ -62,8 +105,16 @@ class ReservaController extends Controller
      */
     public function show($id)
     {
-      $reserva = Reserva::where('id_Usuario', Auth::user()->id)->findOrFail($id);
-      return view('reserva.show')->withData($reserva);
+      //$reserva = Reserva::select('*')->findOrFail($id);
+      $reserva = DB::select(
+      'SELECT r.id, r.dia, r.hora_Inicial, r.hora_Final, r.observacion, r.created_at, r.updated_at,
+      c.nombre, c.descripcion, u.nombre AS nomusu, u.apellido, u.telefono, u.email
+      FROM reservas r INNER JOIN canchas c
+      ON r.id_Cancha = c.id
+      INNER JOIN users u
+      ON r.id_Usuario = u.id
+      AND r.id = '.$id.';');
+      return view('reserva.show', ['list' => $reserva]);
     }
 
     /**

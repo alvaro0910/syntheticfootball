@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Cancha;
 use App\Http\Requests\StoreCanchaRequest;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class CanchaController extends Controller
 {
@@ -45,7 +46,11 @@ class CanchaController extends Controller
       $cancha->imagen = null;
       $cancha->save();
 
-      return back()->with('success_message', 'Cancha agregada con exito');
+      $notificacion = array(
+            'message' => 'Cancha Agregada Con Exito.',
+            'alert-type' => 'success'
+        );
+      return redirect()->back()->with($notificacion);
     }
 
     /**
@@ -57,6 +62,7 @@ class CanchaController extends Controller
     public function show($id)
     {
       $cancha = Cancha::where('id_Usuario', Auth::user()->id)->findOrFail($id);
+      $cancha->propietario = Auth::user()->name;
       return view('cancha.show')->withData($cancha);
     }
 
@@ -85,7 +91,12 @@ class CanchaController extends Controller
       $input = $request->all();
       $cancha->update($input);
 
-      return back()->with('success_message', 'Cancha Actualizada con Exito!');
+      $notificacion = array(
+            'message' => 'Cancha Actualizada Con Exito!',
+            'alert-type' => 'success'
+        );
+      return redirect()->back()->with($notificacion);
+      //return back()->with('success_message', 'Cancha Actualizada con Exito!');
     }
 
     /**
@@ -98,6 +109,11 @@ class CanchaController extends Controller
     {
       $cancha = Cancha::where('id_Usuario', Auth::user()->id)->findOrFail($id);
       $cancha->delete();
-      return back()->with('Cancha Eliminda Con Exito!');
+      $notificacion = array(
+            'message' => 'Cancha Eliminada Con Exito.',
+            'alert-type' => 'info'
+        );
+      return redirect()->back()->with($notificacion);
+      //return back()->with('Cancha Eliminda Con Exito!');
     }
   }

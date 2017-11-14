@@ -26,7 +26,7 @@ Route::get('reservas/{reserva}', 'Api\v1\ReservaController@show');
 Route::get('precios', 'Api\v1\PrecioController@index');
 Route::get('precios/{precio}', 'Api\v1\PrecioController@show');
 
-Route::group(['middleware' => 'auth:api'], function() {
+//Route::group(['middleware' => 'auth:api'], function() {
   Route::post('canchas', 'Api\v1\CanchaController@store');
   Route::put('canchas/{cancha}', 'Api\v1\CanchaController@update');
   Route::delete('canchas/{cancha}', 'Api\v1\CanchaController@delete');
@@ -38,4 +38,4 @@ Route::group(['middleware' => 'auth:api'], function() {
   Route::post('precios', 'Api\v1\PrecioController@store');
   Route::put('precios/{precio}', 'Api\v1\PrecioController@update');
   Route::delete('precios/{precio}', 'Api\v1\PrecioController@delete');
-});
+//});

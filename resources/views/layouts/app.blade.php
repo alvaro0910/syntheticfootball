@@ -11,8 +11,10 @@
     <title>SyntheticFootball - @yield('title')</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" media="all" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css/">
+    <!-- Styles mensajes de alertas y notificaciones -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" type="text/css" media="all" >
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" >
     <link rel="stylesheet" href="{{ asset('css/login.css') }}" >
     <!--<link href="{falta una llave asset('css/app.css') }}" rel="stylesheet">-->
@@ -21,7 +23,6 @@
   <section name="tab">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
-
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
             <span class="icon-bar"></span>
@@ -50,7 +51,7 @@
         </div>
       </div>
     </nav>
-
+    <br><br><br>
     @if($errors->any())
       <div class="alert alert-danger">
           @foreach($errors->all() as $error)

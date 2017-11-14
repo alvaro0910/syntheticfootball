@@ -3,8 +3,6 @@
 @section('title', 'Ver')
 
 @section('content')
-<br><br><br><br>
-
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
@@ -19,7 +17,7 @@
             </tr>
             <tr>
               <td>Propietario</td>
-              <td>{{ $data->id_Usuario }}</td>
+              <td>{{ $data->propietario }}</td>
             </tr>
             <tr>
               <td>Nombre</td>
@@ -62,7 +60,7 @@
                 'method' => 'DELETE',
                 'route' => ['canchas.destroy', $data->id]
             ]) !!}
-            {!! Form::submit('Borrar Cancha?', ['class' => 'btn btn-danger']) !!}
+            {!! Form::submit('Borrar Cancha?', ['class' => 'btn btn-danger', 'onclick' => "return confirm('¿Seguro Que Desea Eliminar Este Registro?')"]) !!}
             {!! Form::close() !!}</td>
             <td><a href="{{ route('canchas.index') }}" class="btn btn-info">Volver a todas las canchas</a></td>
             </tr>
