@@ -21,7 +21,7 @@ class CreateCanchasTable extends Migration
             $table->double('ancho', 15);
             $table->double('largo', 15);
             $table->text('descripcion', 500);
-            $table->binary('imagen')->null();
+            $table->binary('imagen')->nullable();
 
             $table->foreign('id_Usuario')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
