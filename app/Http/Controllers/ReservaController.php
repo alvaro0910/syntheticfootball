@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -143,7 +142,12 @@ class ReservaController extends Controller
       $input = $request->all();
       $reserva->update($input);
 
-      return back()->with('success_message', 'Reserva Actualizada con Exito!');
+      $notificacion = array(
+            'message' => 'Reserva Actualizada Con Exito!',
+            'alert-type' => 'info'
+        );
+      return redirect()->back()->with($notificacion);
+      //return back()->with('success_message', 'Reserva Actualizada con Exito!');
     }
 
     /**
@@ -154,8 +158,13 @@ class ReservaController extends Controller
      */
     public function destroy($id)
     {
-      $reserva = Reserva::where('id_Usuario', Auth::user()->id)->findOrFail($id);
+      $reserva = Reserva::where('id', $id)->findOrFail($id);
       $reserva->delete();
-      return back()->with('Reserva Eliminda Con Exito!');
+
+      $notificacion = array(
+            'message' => 'Reserva Eliminada Con Exito!',
+            'alert-type' => 'info'
+        );
+      return redirect()->back()->with($notificacion);
     }
 }
