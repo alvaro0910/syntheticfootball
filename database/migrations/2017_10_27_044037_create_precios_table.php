@@ -18,9 +18,6 @@ class CreatePreciosTable extends Migration
             $table->increments('id');
             $table->integer('id_Cancha')->unsigned();
             $table->float('precio');
-            $table->time('hora_Inicial');
-            $table->time('hora_Final');
-            $table->date('dia');
 
             $table->foreign('id_Cancha')->references('id')->on('canchas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
