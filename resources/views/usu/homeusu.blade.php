@@ -1,23 +1,39 @@
 @extends('layouts.app')
 
+@section('title', 'Home')
+
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+      <div class="panel-heading">Bienvenido</div>
+        <div class="panel-body">
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in! esto no es admin
-                </div>
+          @if (session('status'))
+            <div class="alert alert-success">
+              {{ session('status') }}
             </div>
+          @endif
+
+          <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+              <th>Lista de Canchas</th>
+              <th>Lista de Reservas</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><a title="Ver" href="/canchasusu">Ir a la Lista <img src="{{ asset('imgs/lista.png') }}" alt="ver" style="width:25px;"/></a></td>
+              <td><a title="Ver" href="/reservasusu">Ir a la Lista <img src="{{ asset('imgs/lista.png') }}" alt="ver" style="width:25px;"/></a></td>
+            </tr>
+            </tbody>
+          </table>
+
         </div>
+      </div>
     </div>
+  </div>
 </div>
 @endsection

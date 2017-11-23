@@ -25,4 +25,6 @@ Route::group(['middleware' => 'auth'], function() {
   Route::resource('canchas','CanchaController');
   Route::resource('precios','PrecioController');
   Route::resource('reservas','ReservaController');
+  Route::resource('canchasusu','CanchaUsuController');
+  Route::resource('reservasusu','ReservaUsuController');
 });
