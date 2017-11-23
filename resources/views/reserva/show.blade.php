@@ -77,10 +77,32 @@
                 'method' => 'DELETE',
                 'route' => ['reservas.destroy', $data->id]
             ]) !!}
-            {!! Form::submit('Borrar Reserva?', ['class' => 'btn btn-danger']) !!}
+            {!! Form::submit('Borrar Reserva?', ['class' => 'btn btn-danger' , 'onclick' => "return confirm('¿Seguro Que Desea Eliminar la Reserva?')"]) !!}
             {!! Form::close() !!}</td>
             <td><a href="{{ route('reservas.index') }}" class="btn btn-info">Volver a todas las reservas</a></td>
             </tr>
           </tbody>
           </table>
+
+          <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+          <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+          <script>
+          @if(Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}";
+            switch(type){
+              case 'info':
+                toastr.info("{{ Session::get('message') }}");
+                break;
+              case 'warning':
+                toastr.warning("{{ Session::get('message') }}");
+                break;
+              case 'success':
+                toastr.success("{{ Session::get('message') }}");
+                break;
+              case 'error':
+                toastr.error("{{ Session::get('message') }}");
+                break;
+            }
+          @endif
+          </script>
 @stop

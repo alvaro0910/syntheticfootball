@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -25,12 +24,13 @@ class ReservaController extends Controller
             //->get();
       //$reserva = Reserva::where('id_Usuario', Auth::user()->id)->get();
       $reserva = DB::select(
-      'SELECT reservas.id, reservas.id_Usuario, reservas.dia, canchas.nombre AS canchanom, users.nombre
-      FROM reservas, users
+      'SELECT reservas.id, reservas.id_Usuario, reservas.dia, precios.precio, canchas.nombre AS canchanom, users.nombre
+      FROM reservas, users, precios
       INNER JOIN canchas
       WHERE canchas.id_Usuario = '.Auth::user()->id.'
       AND reservas.id_Cancha = canchas.id
-      AND users.id = reservas.id_Usuario;');
+      AND users.id = reservas.id_Usuario
+      AND precios.id_Cancha = canchas.id;');
       return view('reserva.index', ['list' =>  $reserva]);
     }
 
@@ -143,7 +143,12 @@ class ReservaController extends Controller
       $input = $request->all();
       $reserva->update($input);
 
-      return back()->with('success_message', 'Reserva Actualizada con Exito!');
+      $notificacion = array(
+            'message' => 'Reserva Actualizada Con Exito!',
+            'alert-type' => 'info'
+        );
+      return redirect()->back()->with($notificacion);
+      //return back()->with('success_message', 'Reserva Actualizada con Exito!');
     }
 
     /**
@@ -154,8 +159,13 @@ class ReservaController extends Controller
      */
     public function destroy($id)
     {
-      $reserva = Reserva::where('id_Usuario', Auth::user()->id)->findOrFail($id);
+      $reserva = Reserva::where('id', $id)->findOrFail($id);
       $reserva->delete();
-      return back()->with('Reserva Eliminda Con Exito!');
+
+      $notificacion = array(
+            'message' => 'Reserva Eliminada Con Exito!',
+            'alert-type' => 'info'
+        );
+      return redirect()->back()->with($notificacion);
     }
 }

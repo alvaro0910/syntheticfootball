@@ -109,6 +109,7 @@ class CanchaController extends Controller
     {
       $cancha = Cancha::where('id_Usuario', Auth::user()->id)->findOrFail($id);
       $cancha->delete();
+
       $notificacion = array(
             'message' => 'Cancha Eliminada Con Exito.',
             'alert-type' => 'info'
