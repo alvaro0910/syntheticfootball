@@ -24,12 +24,13 @@ class ReservaController extends Controller
             //->get();
       //$reserva = Reserva::where('id_Usuario', Auth::user()->id)->get();
       $reserva = DB::select(
-      'SELECT reservas.id, reservas.id_Usuario, reservas.dia, canchas.nombre AS canchanom, users.nombre
-      FROM reservas, users
+      'SELECT reservas.id, reservas.id_Usuario, reservas.dia, precios.precio, canchas.nombre AS canchanom, users.nombre
+      FROM reservas, users, precios
       INNER JOIN canchas
       WHERE canchas.id_Usuario = '.Auth::user()->id.'
       AND reservas.id_Cancha = canchas.id
-      AND users.id = reservas.id_Usuario;');
+      AND users.id = reservas.id_Usuario
+      AND precios.id_Cancha = canchas.id;');
       return view('reserva.index', ['list' =>  $reserva]);
     }
 

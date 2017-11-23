@@ -25,22 +25,22 @@
                 </tr>
               <tfoot>
               <tbody>
-                  @foreach ($list as $e)
-                    </tr>
-                    <tr>
-                    <td>{{ $e->nombre }}</td>
-                    <td>{{ $e->precio }}</td>
-                    <td><a title="Ver" href="{{ route('precios.show', $e) }}"><img src="{{ asset('imgs/ver.png') }}" alt="ver" style="width:25px;"/></a></td>
-                    <td><a title="Editar" href="{{ route('precios.edit', $e->id) }}"><img src="{{ asset('imgs/editar.png') }}" alt="editar" style="width:25px;"/></a></td>
+                @foreach ($list as $e)
+                  </tr>
+                  <tr>
+                  <td>{{ $e->nombre }}</td>
+                  <td>{{ $e->precio }}</td>
+                  <td><a title="Ver" href="{{ route('precios.show', $e->id) }}"><img src="{{ asset('imgs/ver.png') }}" alt="ver" style="width:25px;"/></a></td>
+                  <td><a title="Editar" href="{{ route('precios.edit', $e->id) }}"><img src="{{ asset('imgs/editar.png') }}" alt="editar" style="width:25px;"/></a></td>
 
-                    <td>
-                      {!! Form::open(['method' => 'DELETE','route' => ['precios.destroy', $e->id]]) !!}
-                      {!! Form::submit('Eliminar Precio?', ['class' => 'btn btn-danger', 'onclick' => "return confirm('¿Seguro que Desea Eliminarlo?')"])!!}
-                      {!! Form::close() !!}
-                    </td>
-                    </tr>
-                    <!--<p>{ $e->user->nombre }}</p>-->
-                  @endforeach
+                  <td>
+                    {!! Form::open(['method' => 'DELETE','route' => ['precios.destroy', $e->id]]) !!}
+                    {!! Form::submit('Eliminar Precio?', ['class' => 'btn btn-danger', 'onclick' => "return confirm('¿Seguro que Desea Eliminarlo?')"])!!}
+                    {!! Form::close() !!}
+                  </td>
+                  </tr>
+                  <!--<p>{ $e->user->nombre }}</p>-->
+                @endforeach
                   </tbody>
                   </table>
                   </div>

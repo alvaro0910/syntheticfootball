@@ -16,6 +16,7 @@
                 <th>Cliente</th>
                 <th>Cancha</th>
                 <th>Dia</th>
+                <th>Costo</th>
                 <th>Ver</th>
                 <th>Editar</th>
               </tr>
@@ -33,6 +34,7 @@
               <td><p>{{ $e->nombre }}</p></td>
               <td><p>{{ $e->canchanom }}</p></td>
               <td><p>{{ $e->dia }}</p></td>
+              <td><p>$ {{ $e->precio }}</p></td>
               <td><a title="Ver" href="{{ route('reservas.show', $e->id) }}"><img src="{{ asset('imgs/ver.png') }}" alt="ver" style="width:25px;"/></a></td>
               <td><a title="Editar" href="{{ route('reservas.edit', $e->id) }}"><img src="{{ asset('imgs/editar.png') }}" alt="editar" style="width:25px;"/></a></td>
               <td>

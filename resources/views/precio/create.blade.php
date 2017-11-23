@@ -23,8 +23,8 @@
             </div>
 
             <div class="form-group">
-              <label for="dia" class="control-label">Precio</label>
-              <input type="date" name="dia" class="form-control">
+              <label for="precio" class="control-label">Precio</label>
+              <input type="number" name="precio" class="form-control" required>
             </div>
 
             <table class="table">
