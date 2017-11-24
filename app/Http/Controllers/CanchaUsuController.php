@@ -29,8 +29,8 @@ class CanchaUsuController extends Controller
      */
     public function show($id)
     {
-      $cancha = Cancha::where('id_Usuario', Auth::user()->id)->findOrFail($id);
-      $cancha->propietario = Auth::user()->name;
-      return view('cancha.show')->withData($cancha);
+      $cancha = Cancha::where('id', $id)->findOrFail($id);
+      $cancha->propietario = DB::table('users')->where('id_Cancha', $id)->join('users', 'users.id', '=', 'canchas.id_Usuario')->value('nombre as name');
+      return view('usu.cancha.show')->withData($cancha);
     }
   }

@@ -21,7 +21,7 @@
             </thead>
             <tfoot>
               <tr>
-                <td colspan="2" style="text-align:center"><a title="Regresar" href="{{ route('admin') }}" >Regresar <img src="{{ asset('imgs/regresar.png') }}" alt="ver" style="width:25px;"/></a></td>
+                <td colspan="2" style="text-align:center"><a title="Regresar" href="{{ route('usu') }}" >Regresar <img src="{{ asset('imgs/regresar.png') }}" alt="ver" style="width:25px;"/></a></td>
               </tr>
             <tfoot>
             <tbody>
