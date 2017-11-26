@@ -30,7 +30,10 @@ class CanchaUsuController extends Controller
     public function show($id)
     {
       $cancha = Cancha::where('id', $id)->findOrFail($id);
-      $cancha->propietario = DB::table('users')->where('id_Cancha', $id)->join('users', 'users.id', '=', 'canchas.id_Usuario')->value('nombre as name');
-      return view('usu.cancha.show')->withData($cancha);
+      $propietario = DB::select(
+        'SELECT users.nombre, users.telefono FROM users
+        INNER JOIN canchas
+        WHERE canchas.id = '.$id.' AND canchas.id_Usuario = users.id;');
+      return view('usu.cancha.show')->with('data', $cancha)->with('propietario', $propietario);
     }
   }

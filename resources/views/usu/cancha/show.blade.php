@@ -9,7 +9,7 @@
       <div class="panel panel-default">
       <div class="panel-heading">Detalle Cancha Seleccionada</div>
         <div class="panel-body">
-        <h1>{{ $data->name }}</h1>
+        <h1>{{ $data->nombre }}</h1>
         <table class="table table-striped table-hover">
           <tr>
             <td style="width: 200px;">Id</td>
@@ -17,7 +17,19 @@
           </tr>
           <tr>
             <td>Propietario</td>
-            <td>{{ $data->propietario }}</td>
+            <td>
+              @foreach ($propietario as $value)
+                {{ $value->nombre }}
+              @endforeach
+            </td>
+          </tr>
+          <tr>
+            <td>Telefono Contacto</td>
+            <td>
+              @foreach ($propietario as $value)
+                {{ $value->telefono }}
+              @endforeach
+            </td>
           </tr>
           <tr>
             <td>Nombre</td>
