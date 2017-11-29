@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
-class ReservaController extends Controller
+class ReservaUsuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,20 +18,15 @@ class ReservaController extends Controller
      */
     public function index()
     {
-      //$reserva = DB::select('reservas')
-            //->join('canchas', 'reservas.id', '=', 'canchas.id_Usuario')
-            //->select('reservas.*', 'canchas.nombre')
-            //->get();
-      //$reserva = Reserva::where('id_Usuario', Auth::user()->id)->get();
       $reserva = DB::select(
       'SELECT reservas.id, reservas.id_Usuario, reservas.dia, precios.precio, canchas.nombre AS canchanom, users.nombre
-      FROM reservas, users, precios
-      INNER JOIN canchas
-      WHERE canchas.id_Usuario = '.Auth::user()->id.'
+      FROM canchas, users, precios
+      INNER JOIN reservas
+      WHERE reservas.id_Usuario = '.Auth::user()->id.'
       AND reservas.id_Cancha = canchas.id
       AND users.id = reservas.id_Usuario
       AND precios.id_Cancha = canchas.id;');
-      return view('reserva.index', ['list' =>  $reserva]);
+      return view('usu.reserva.index', ['list' =>  $reserva]);
     }
 
     /**
@@ -41,9 +36,8 @@ class ReservaController extends Controller
      */
     public function create()
     {
-      //$cancha = Cancha::select('*')->get();
-      $cancha = Cancha::where('id_Usuario', Auth::user()->id)->get();
-      return view('reserva.create', ['list' => $cancha]);
+      $cancha = Cancha::select('*')->get();
+      return view('usu.reserva.create', ['list' => $cancha]);
     }
 
     /**
@@ -78,8 +72,6 @@ class ReservaController extends Controller
                 'alert-type' => 'success'
             );
           return redirect()->back()->with($notificacion);
-
-          //return back()->with('success_message', 'Reserva Realizada con Exito');
         }else {
           $notificacion = array(
                 'message' => 'Hora Inicial Debe ser Menor a la Hora Final!',
@@ -105,7 +97,6 @@ class ReservaController extends Controller
      */
     public function show($id)
     {
-      //$reserva = Reserva::select('*')->findOrFail($id);
       $reserva = DB::select(
       'SELECT r.id, r.dia, r.hora_Inicial, r.hora_Final, r.observacion, r.created_at, r.updated_at,
       c.nombre, c.descripcion, u.nombre AS nomusu, u.apellido, u.telefono, u.email
@@ -114,7 +105,7 @@ class ReservaController extends Controller
       INNER JOIN users u
       ON r.id_Usuario = u.id
       AND r.id = '.$id.';');
-      return view('reserva.show', ['list' => $reserva]);
+      return view('usu.reserva.show', ['list' => $reserva]);
     }
 
     /**
@@ -127,7 +118,7 @@ class ReservaController extends Controller
     {
       $cancha = Cancha::select('*')->get();
       $reserva = Reserva::where('id_Usuario', Auth::user()->id)->findOrFail($id);
-      return view('reserva.edit', ['data' => $reserva, 'list' => $cancha]);
+      return view('usu.reserva.edit', ['data' => $reserva, 'list' => $cancha]);
     }
 
     /**
@@ -148,7 +139,6 @@ class ReservaController extends Controller
             'alert-type' => 'info'
         );
       return redirect()->back()->with($notificacion);
-      //return back()->with('success_message', 'Reserva Actualizada con Exito!');
     }
 
     /**
