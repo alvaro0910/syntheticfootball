@@ -24,7 +24,7 @@ class ReservaController extends Controller
             //->get();
       //$reserva = Reserva::where('id_Usuario', Auth::user()->id)->get();
       $reserva = DB::select(
-      'SELECT reservas.id, reservas.id_Usuario, reservas.dia, precios.precio, canchas.nombre AS canchanom, users.nombre
+      'SELECT reservas.id, reservas.id_Usuario, reservas.dia, reservas.hora_Inicial, reservas.hora_Final, precios.precio, canchas.nombre AS canchanom, users.nombre
       FROM reservas, users, precios
       INNER JOIN canchas
       WHERE canchas.id_Usuario = '.Auth::user()->id.'
@@ -125,7 +125,9 @@ class ReservaController extends Controller
      */
     public function edit($id)
     {
-      $cancha = Cancha::select('*')->get();
+      //$cancha = Cancha::select('*')->get();
+      $cancha = DB::table('canchas')
+                ->where('id_Usuario', Auth::user()->id)->get();
       $reserva = Reserva::where('id_Usuario', Auth::user()->id)->findOrFail($id);
       return view('reserva.edit', ['data' => $reserva, 'list' => $cancha]);
     }

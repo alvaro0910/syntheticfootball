@@ -15,6 +15,7 @@
             <tr>
               <th>Cancha ID</th>
               <th>Nombre</th>
+              <th>Costo x Hora</th>
               <th>Ver</th>
               <th>Reservar</th>
             </tr>
@@ -29,6 +30,7 @@
               <tr>
                 <td>{{ $e->id }}</td>
                 <td><p>{{ $e->nombre }}</p></td>
+                <td><p>{{ $e->precio }}</p></td>
                 <td><a title="Ver" href="{{ route('canchasusu.show', $e->id) }}"><img src="{{ asset('imgs/ver.png') }}" alt="ver" style="width:25px;"/></a></td>
                 <td><a title="Reservar" href="{{ route('reservasusu.create', $e->id) }}"><img src="{{ asset('imgs/reserva.png') }}" alt="editar" style="width:25px;"/></a></td>
               </tr>
