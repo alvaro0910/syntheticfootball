@@ -19,7 +19,7 @@ class ReservaUsuController extends Controller
     public function index()
     {
       $reserva = DB::select(
-      'SELECT reservas.id, reservas.id_Usuario, reservas.dia, precios.precio, canchas.nombre AS canchanom, users.nombre
+      'SELECT reservas.id, reservas.hora_Inicial, reservas.hora_Final, reservas.id_Usuario, reservas.dia, precios.precio, canchas.nombre AS canchanom, users.nombre
       FROM canchas, users, precios
       INNER JOIN reservas
       WHERE reservas.id_Usuario = '.Auth::user()->id.'

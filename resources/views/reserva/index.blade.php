@@ -29,12 +29,32 @@
             <tfoot>
             <tbody>
             @foreach ($list as $e)
+              @php
+                $horai=substr($e->hora_Inicial,0,2);
+                $mini=substr($e->hora_Inicial,3,2);
+                $segi=substr($e->hora_Inicial,6,2);
+
+                $horaf=substr($e->hora_Final,0,2);
+                $minf=substr($e->hora_Final,3,2);
+                $segf=substr($e->hora_Final,6,2);
+
+                $ini=((($horai*60)*60)+($mini*60)+$segi);
+                $fin=((($horaf*60)*60)+($minf*60)+$segf);
+
+                $dif=$fin-$ini;
+
+                $difh=floor($dif/3600);
+                $difm=floor(($dif-($difh*3600))/60);
+                $difs=$dif-($difm*60)-($difh*3600);
+                date("H-i-s",mktime($difh,$difm,$difs));
+                $costoTotal = $difh * $e->precio;
+              @endphp
               <tr>
               <td>{{ $e->id  }}</td>
               <td><p>{{ $e->nombre }}</p></td>
               <td><p>{{ $e->canchanom }}</p></td>
               <td><p>{{ $e->dia }}</p></td>
-              <td><p>$ {{ $e->precio }}</p></td>
+              <td><p>$ {{ $costoTotal }}</p></td>
               <td><a title="Ver" href="{{ route('reservas.show', $e->id) }}"><img src="{{ asset('imgs/ver.png') }}" alt="ver" style="width:25px;"/></a></td>
               <td><a title="Editar" href="{{ route('reservas.edit', $e->id) }}"><img src="{{ asset('imgs/editar.png') }}" alt="editar" style="width:25px;"/></a></td>
               <td>
