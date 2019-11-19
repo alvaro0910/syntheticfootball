@@ -125,6 +125,10 @@ class ReservaController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
+=======
+      //$cancha = Cancha::select('*')->get();
+>>>>>>> a6cb07ecaae8d312a4094f4704dba865fdba4dec
       $cancha = DB::table('canchas')
                 ->where('id_Usuario', Auth::user()->id)->get();
       $reserva = Reserva::where('id_Usuario', Auth::user()->id)->findOrFail($id);

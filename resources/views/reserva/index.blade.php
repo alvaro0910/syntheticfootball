@@ -50,6 +50,7 @@
                 $costoTotal = $difh * $e->precio;
               @endphp
               <tr>
+<<<<<<< HEAD
               <td>{{ $e->id  }}</td>
               <td><p>{{ $e->nombre }}</p></td>
               <td><p>{{ $e->canchanom }}</p></td>
@@ -63,6 +64,21 @@
                 {!! Form::close() !!}
               </td>
             </tr>
+=======
+                <td>{{ $e->id  }}</td>
+                <td><p>{{ $e->nombre }}</p></td>
+                <td><p>{{ $e->canchanom }}</p></td>
+                <td><p>{{ $e->dia }}</p></td>
+                <td><p>$ {{ $costoTotal }}</p></td>
+                <td><a title="Ver" href="{{ route('reservas.show', $e->id) }}"><img src="{{ asset('imgs/ver.png') }}" alt="ver" style="width:25px;"/></a></td>
+                <td><a title="Editar" href="{{ route('reservas.edit', $e->id) }}"><img src="{{ asset('imgs/editar.png') }}" alt="editar" style="width:25px;"/></a></td>
+                <td>
+                  {!! Form::open(['method' => 'DELETE','route' => ['reservas.destroy', $e->id]]) !!}
+                  {!! Form::submit('Borrar Esta Reserva?', ['class' => 'btn btn-danger', 'onclick' => "return confirm('¿Seguro Que Desea Eliminar la Reserva?')"]) !!}
+                  {!! Form::close() !!}
+                </td>
+              </tr>
+>>>>>>> a6cb07ecaae8d312a4094f4704dba865fdba4dec
             @endforeach
             </tbody>
           </table>

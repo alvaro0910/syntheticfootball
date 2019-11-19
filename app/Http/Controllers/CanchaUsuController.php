@@ -20,10 +20,10 @@ class CanchaUsuController extends Controller
       //$cancha = DB::table('canchas')->orderBy('created_at', 'DESC')->paginate();
 
       $cancha = DB::select(
-  'SELECT precios.precio, canchas.id, canchas.nombre
-  FROM precios
-  INNER JOIN canchas
-  WHERE precios.id_Cancha = canchas.id;');
+      'SELECT precios.precio, canchas.id, canchas.nombre
+      FROM precios
+      INNER JOIN canchas
+      WHERE precios.id_Cancha = canchas.id;');
       return view('usu.cancha.index', ['list' => $cancha]);
     }
 
