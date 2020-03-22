@@ -8,13 +8,13 @@
       <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
           <div class="panel-heading">Agregar Nueva Reserva</div>
-            <div class="panel-body">
+          <div class="panel-body">
             <p class="lead">Ingrese la Informacion de la Nueva Reserva.</p>
             <hr>
             {!! Form::open(['route' => 'reservasusu.store']) !!}
 
             <div class="form-group">
-            <label for="cancha" class="control-label">Seleccione la cancha</label>
+              <label for="cancha" class="control-label">Seleccione la cancha</label>
               <select class="form-control" name="id_Cancha">
                 @foreach ($list as $e)
                   <option value="{{ $e->id }}">{{ $e->nombre }}</option>
@@ -66,21 +66,21 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <script>
   @if(Session::has('message'))
-    var type = "{{ Session::get('alert-type', 'info') }}";
-    switch(type){
-      case 'info':
-        toastr.info("{{ Session::get('message') }}");
-        break;
-      case 'warning':
-        toastr.warning("{{ Session::get('message') }}");
-        break;
-      case 'success':
-        toastr.success("{{ Session::get('message') }}");
-        break;
-      case 'error':
-        toastr.error("{{ Session::get('message') }}");
-        break;
-    }
+  var type = "{{ Session::get('alert-type', 'info') }}";
+  switch(type){
+    case 'info':
+    toastr.info("{{ Session::get('message') }}");
+    break;
+    case 'warning':
+    toastr.warning("{{ Session::get('message') }}");
+    break;
+    case 'success':
+    toastr.success("{{ Session::get('message') }}");
+    break;
+    case 'error':
+    toastr.error("{{ Session::get('message') }}");
+    break;
+  }
   @endif
   </script>
 @stop
