@@ -434,7 +434,7 @@
                 "symfony/console": "~3.3",
                 "symfony/debug": "~3.3",
                 "symfony/finder": "~3.3",
-                "symfony/http-foundation": "~3.3",
+                "symfony/http-foundation": "4.2.12",
                 "symfony/http-kernel": "~3.3",
                 "symfony/process": "~3.3",
                 "symfony/routing": "~3.3",
@@ -1734,7 +1734,7 @@
                 "psr/log": "~1.0",
                 "symfony/debug": "~2.8|~3.0",
                 "symfony/event-dispatcher": "~2.8|~3.0",
-                "symfony/http-foundation": "~3.3"
+                "symfony/http-foundation": "4.2.12"
             },
             "conflict": {
                 "symfony/config": "<2.8",
@@ -1938,7 +1938,7 @@
                 "symfony/config": "~2.8|~3.0",
                 "symfony/dependency-injection": "~3.3",
                 "symfony/expression-language": "~2.8|~3.0",
-                "symfony/http-foundation": "~2.8|~3.0",
+                "symfony/http-foundation": "4.2.12",
                 "symfony/yaml": "~3.3"
             },
             "suggest": {
